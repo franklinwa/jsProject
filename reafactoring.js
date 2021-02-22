@@ -34,6 +34,31 @@ function statement (invoice, plays) {
                           minimumFractionDigits: 2 }).format;
   for (let perf of invoice.performances) { 
     const play = plays[perf.playID];
+    
+    //调用新提炼的函数，直接初始化thisAmount
+    let thisAmount = amountFor(perf,play);
+    
+
+   
+
+    // add volume credits
+    volumeCredits += Math.max(perf.audience - 30, 0);
+    // add extra credit for every ten comedy attendees
+    if ("comedy" === play.type) volumeCredits += Math.floor(perf.audience / 5);
+
+    // print line for this order
+    result += ` ${play.name}: ${format(thisAmount/100)} (${perf.audience} seats)\n`;
+    totalAmount += thisAmount;
+  }
+  result += `Amount owed is ${format(totalAmount/100)}\n`;
+  result += `You earned ${volumeCredits} credits\n`;
+  return result;
+}
+
+//将计算戏剧演出的费用的代码提炼为函数
+
+function amountFor(perf,play){
+    
     let thisAmount = 0;
 
     switch (play.type) {
@@ -53,19 +78,9 @@ function statement (invoice, plays) {
     default:
         throw new Error(`unknown type: ${play.type}`);
     }
-
-    // add volume credits
-    volumeCredits += Math.max(perf.audience - 30, 0);
-    // add extra credit for every ten comedy attendees
-    if ("comedy" === play.type) volumeCredits += Math.floor(perf.audience / 5);
-
-    // print line for this order
-    result += ` ${play.name}: ${format(thisAmount/100)} (${perf.audience} seats)\n`;
-    totalAmount += thisAmount;
-  }
-  result += `Amount owed is ${format(totalAmount/100)}\n`;
-  result += `You earned ${volumeCredits} credits\n`;
-  return result;
+    
+    return thisAmount;
 }
+
 
 console.log(statement(invoices, plays))
