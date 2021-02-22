@@ -57,23 +57,23 @@ function statement (invoice, plays) {
 
 //将计算戏剧演出的费用的代码提炼为函数
 
-function amountFor(perf,play){
+function amountFor(aPerformances,play){
     
     let result = 0;
 
     switch (play.type) {
     case "tragedy":
       thisAmount = 40000;
-      if (perf.audience > 30) {
-        result += 1000 * (perf.audience - 30);
+      if (aPerformances .audience > 30) {
+        result += 1000 * (aPerformances.audience - 30);
       }
       break;
     case "comedy":
       thisAmount = 30000;
-      if (perf.audience > 20) {
-        result += 10000 + 500 * (perf.audience - 20);
+      if (aPerformances.audience > 20) {
+        result += 10000 + 500 * (aPerformances.audience - 20);
       }
-      result += 300 * perf.audience;
+      result += 300 * aPerformances.audience;
       break;
     default:
         throw new Error(`unknown type: ${play.type}`);
