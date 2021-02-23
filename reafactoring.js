@@ -33,7 +33,8 @@ function statement (invoice, plays) {
                         { style: "currency", currency: "USD",
                           minimumFractionDigits: 2 }).format;
   for (let perf of invoice.performances) { 
-    const play = plays[perf.playID];
+    
+      const play = playFor(perf);
     
     //调用新提炼的函数，直接初始化thisAmount
     let thisAmount = amountFor(perf,play);
@@ -80,6 +81,12 @@ function amountFor(aPerformances,play){
     }
     
     return result;
+}
+
+function playFor(aPerformances){
+    
+    return plays[aPerformances.playID]
+    
 }
 
 
