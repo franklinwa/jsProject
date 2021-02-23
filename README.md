@@ -25,9 +25,9 @@ volumeCredits += Math.max(perf.audience - 30, 0);
 if ("comedy" === playFor(perf).type) volumeCredits += Math.floor(perf.audience / 5);
 ```
 
-修改为：
+初次修改为：
 ```
-functiong volumeCreditaFor(pref){
+function volumeCreditaFor(pref){
 
 let volumeCredits = 0
 
@@ -36,6 +36,24 @@ volumeCredits += Math.max(perf.audience - 30, 0);
 if ("comedy" === playFor(perf).type) volumeCredits += Math.floor(perf.audience / 5);
 
 return volumeCredits;
+
+}
+
+```
+
+
+再次修改为：
+```
+function volumeCreditsFor(aPerformances){
+
+    let result = 0
+
+    result += Math.max(aPerformances.audience - 30, 0);
+
+    if ("comedy" === playFor(aPerformances).type) 
+        result += Math.floor(aPerformances.audience / 5);
+
+    return result;
 
 }
 
