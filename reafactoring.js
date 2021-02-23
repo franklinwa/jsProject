@@ -35,13 +35,9 @@ function statement (invoice, plays) {
   for (let perf of invoice.performances) { 
     
      
-    
     //调用新提炼的函数，直接初始化thisAmount
-    let thisAmount = amountFor(perf,playFor(perf));
+    let thisAmount = amountFor(perf);
     
-
-   
-
     // add volume credits
     volumeCredits += Math.max(perf.audience - 30, 0);
     // add extra credit for every ten comedy attendees
@@ -58,11 +54,11 @@ function statement (invoice, plays) {
 
 //将计算戏剧演出的费用的代码提炼为函数
 
-function amountFor(aPerformances,play){
+function amountFor(aPerformances){
     
     let result = 0;
 
-    switch (play.type) {
+    switch (playFor(aPerformances).type) {
     case "tragedy":
       thisAmount = 40000;
       if (aPerformances .audience > 30) {
