@@ -37,7 +37,6 @@ function statement(invoice, plays) {
     // 拆分循环
     let volumeCredits = totalVolumeCredits(invoice)
 
-
     result += `Amount owed is ${usd(totalAmount)}\n`;
     result += `You earned ${totalVolumeCredits(invoice)} credits\n`;
     return result;
