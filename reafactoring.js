@@ -21,17 +21,14 @@ var invoices = {
     ]
 }
 
+console.log(statement(invoices, plays))
 
 function statement(invoice, plays) {
-
-
     let result = `Statement for ${invoice.customer}\n`;
 
     for (let perf of invoice.performances) {
-
         // print line for this order
         result += ` ${playFor(perf).name}: ${usd(amountFor(perf))} (${perf.audience} seats)\n`;
-
     }
 
     result += `Amount owed is ${usd( totalAmount (invoice))}\n`;
@@ -44,52 +41,10 @@ function totalAmount(aInvoice) {
     for (let perf of aInvoice.performances) {
         result += amountFor(perf);
     }
-
     return result
-
 }
-
-function totalVolumeCredits(aInvoice) {
-
-    let result = 0;
-    for (let perf of aInvoice.performances) {
-
-        result += volumeCreditsFor(perf);
-        // add volume credits
-    }
-    return result;
-
-}
-
-function usd(aNumber) {
-
-    return new Intl.NumberFormat("en-US",
-
-        {
-            style: "currency",
-            currency: "USD",
-
-            minimumFractionDigits: 2
-        }).format(aNumber / 100);
-
-}
-
-function volumeCreditsFor(aPerformances) {
-
-    let result = 0
-
-    result += Math.max(aPerformances.audience - 30, 0);
-
-    if ("comedy" === playFor(aPerformances).type)
-        result += Math.floor(aPerformances.audience / 5);
-
-    return result;
-
-}
-
 
 //将计算戏剧演出的费用的代码提炼为函数
-
 function amountFor(aPerformances) {
 
     let result = 0;
@@ -111,15 +66,52 @@ function amountFor(aPerformances) {
         default:
             throw new Error(`unknown type: ${play.type}`);
     }
+    return result;
+}
+
+
+function totalVolumeCredits(aInvoice) {
+
+    let result = 0;
+    for (let perf of aInvoice.performances) {
+
+        result += volumeCreditsFor(perf);
+        // add volume credits
+    }
+    return result;
+
+}
+
+function volumeCreditsFor(aPerformances) {
+
+    let result = 0
+    result += Math.max(aPerformances.audience - 30, 0);
+
+    if ("comedy" === playFor(aPerformances).type)
+        result += Math.floor(aPerformances.audience / 5);
 
     return result;
 }
+
+
+
+function usd(aNumber) {
+
+    return new Intl.NumberFormat("en-US",
+
+        {
+            style: "currency",
+            currency: "USD",
+
+            minimumFractionDigits: 2
+        }).format(aNumber / 100);
+
+}
+
+
 
 function playFor(aPerformances) {
 
     return plays[aPerformances.playID]
 
 }
-
-
-console.log(statement(invoices, plays))
