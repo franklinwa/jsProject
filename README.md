@@ -57,27 +57,3 @@ function volumeCreditsFor(aPerformances){
 
 }
 
-```
-1.4.8 将函数赋给变量，更应将其替换为一个明确声明的函数，并为函数命名要体现函数的意图。将常量format，提升为明确的声明的函数，并根据其功能，将函数名修改为usd。
-
-```
- const format = new Intl.NumberFormat("en-US",
- 
-                        { style: "currency", currency: "USD",
-                        
-                          minimumFractionDigits: 2 }).format;
-```
-
-提升为函数
-
-```
-function usd(aNumber){
-
-return new Intl.NumberFormat("en-US",
-
-                        { style: "currency", currency: "USD",
-                        
-                          minimumFractionDigits: 2 }).format(aNumber/100);
-
-}
-```
