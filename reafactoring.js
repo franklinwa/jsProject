@@ -23,7 +23,7 @@ var invoices = {
 
 
 function statement(invoice, plays) {
-    let totalAmount = 0;
+
 
     let result = `Statement for ${invoice.customer}\n`;
 
@@ -31,28 +31,33 @@ function statement(invoice, plays) {
 
         // print line for this order
         result += ` ${playFor(perf).name}: ${usd(amountFor(perf))} (${perf.audience} seats)\n`;
-        totalAmount += amountFor(perf);
+
     }
 
-    // 拆分循环
-    let volumeCredits = totalVolumeCredits(invoice)
-
-
-    result += `Amount owed is ${usd(totalAmount)}\n`;
+    result += `Amount owed is ${usd( totalAmount (invoice))}\n`;
     result += `You earned ${totalVolumeCredits(invoice)} credits\n`;
     return result;
 }
 
+function totalAmount(aInvoice) {
+    let result = 0;
+    for (let perf of aInvoice.performances) {
+        result += amountFor(perf);
+    }
 
-function totalVolumeCredits(invoice) {
+    return result
 
-    let volumeCredits = 0;
-    for (let perf of invoice.performances) {
+}
 
-        volumeCredits += volumeCreditsFor(perf);
+function totalVolumeCredits(aInvoice) {
+
+    let result = 0;
+    for (let perf of aInvoice.performances) {
+
+        result += volumeCreditsFor(perf);
         // add volume credits
     }
-    return volumeCredits;
+    return result;
 
 }
 
