@@ -1,18 +1,21 @@
-
-
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>《重构 改善既有代码的设计》</title>
     <script src="reafactoring.js"></script>
 
 </head>
-<body>
-<p>1.4.8 <br>将函数赋给变量，更应将其替换为一个明确声明的函数，并为函数命名要体现函数的意图。将常量format，提升为明确的声明的函数，并根据其功能，将函数名修改为usd。</p>
 
-       
+<body>
+    <p>1.4.9 <br>移除观众量积分总和，<br>第一步就是应用拆分循环，将volumeCredits的累加过程从迭代中分离出来。
+        <br>第二步，利用移动语句手法将变量声明挪动到紧邻循环的位置。<br>第三步，同样是先对变量的计算过程提炼函数。
+        <br>第四步，应用内联变量手法内联函数。</p>
+
+
 
 </body>
-</html>
 
+</html>

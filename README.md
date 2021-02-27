@@ -81,3 +81,49 @@ return new Intl.NumberFormat("en-US",
 
 }
 ```
+
+1.4.9 移除观众量积分总和。
+
+第一步就是应用拆分循环，将volumeCredits的累加过程从迭代中分离出来。
+
+将以下代码分离为如下：
+```
+for (let perf of invoice.performances) { 
+    
+    volumeCredits += volumeCreditsFor(perf);
+    // add volume credits
+
+    // print line for this order
+    result += ` ${playFor(perf).name}: ${usd(amountFor(perf))} (${perf.audience} seats)\n`;
+    totalAmount += amountFor(perf);
+  }
+
+```
+
+修改为：
+```
+for (let perf of invoice.performances) { 
+    
+    volumeCredits += volumeCreditsFor(perf);
+    // add volume credits
+
+    // print line for this order
+    result += ` ${playFor(perf).name}: ${usd(amountFor(perf))} (${perf.audience} seats)\n`;
+    totalAmount += amountFor(perf);
+  }
+
+  // 拆分循环
+let volumeCredits = 0;
+for (let perf of invoice.performances) { 
+    
+    volumeCredits += volumeCreditsFor(perf);
+    // add volume credits
+  }
+```
+
+
+第二步，利用移动语句手法将变量声明挪动到紧邻循环的位置。
+
+第三步，同样是先对变量的计算过程提炼函数。
+   
+第四步，应用内联变量手法内联函数。
