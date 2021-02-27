@@ -35,18 +35,26 @@ function statement(invoice, plays) {
     }
 
     // 拆分循环
-    let volumeCredits = 0;
-    for (let perf of invoice.performances) {
+    let volumeCredits = totalVolumeCredits(invoice)
 
-        volumeCredits += volumeCreditsFor(perf);
-        // add volume credits
-    }
 
     result += `Amount owed is ${usd(totalAmount)}\n`;
     result += `You earned ${volumeCredits} credits\n`;
     return result;
 }
 
+
+function totalVolumeCredits(invoice) {
+
+    let volumeCredits = 0;
+    for (let perf of invoice.performances) {
+
+        volumeCredits += volumeCreditsFor(perf);
+        // add volume credits
+    }
+    return volumeCredits;
+
+}
 
 function usd(aNumber) {
 

@@ -113,7 +113,7 @@ for (let perf of invoice.performances) {
   }
 
   // 拆分循环
-let volumeCredits = 0;
+
 for (let perf of invoice.performances) { 
     
     volumeCredits += volumeCreditsFor(perf);
@@ -124,6 +124,10 @@ for (let perf of invoice.performances) {
 
 第二步，利用移动语句手法将变量声明挪动到紧邻循环的位置。
 
+let volumeCredits = 0;
+
 第三步，同样是先对变量的计算过程提炼函数。
+
+
    
 第四步，应用内联变量手法内联函数。
